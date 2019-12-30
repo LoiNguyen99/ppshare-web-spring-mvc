@@ -13,6 +13,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -21,6 +22,8 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class ImplementContextListener implements ServletContextListener {
 
+    private static final Logger LOGGER = Logger.getLogger(ImplementContextListener.class);
+    
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
@@ -36,7 +39,7 @@ public class ImplementContextListener implements ServletContextListener {
                 d = drivers.nextElement();
                 DriverManager.deregisterDriver(d);
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                LOGGER.error(ex.getMessage());
             }
         }
         AbandonedConnectionCleanupThread.uncheckedShutdown();

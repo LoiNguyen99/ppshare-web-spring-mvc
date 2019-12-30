@@ -36,7 +36,7 @@ public class DownloadController {
     @Autowired
     SlideService service;
     
-    private static final Logger LOGGER = Logger.getLogger(ManageController.class);
+    private static final Logger LOGGER = Logger.getLogger(DownloadController.class);
 
     @RequestMapping("{id}/{fileName}")
     public void download(HttpServletResponse response,@PathVariable("id") String id, @PathVariable("fileName") String fileName) {
