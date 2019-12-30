@@ -15,13 +15,12 @@ import java.io.InputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 /**
  *
  * @author Loi Nguyen
@@ -36,6 +35,8 @@ public class DownloadController {
     
     @Autowired
     SlideService service;
+    
+    private static final Logger LOGGER = Logger.getLogger(ManageController.class);
 
     @RequestMapping("{id}/{fileName}")
     public void download(HttpServletResponse response,@PathVariable("id") String id, @PathVariable("fileName") String fileName) {
@@ -59,7 +60,7 @@ public class DownloadController {
             FileCopyUtils.copy(inputStream, response.getOutputStream());
             service.updateDownload(Integer.parseInt(id));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
     }
