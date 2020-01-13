@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class IndexController {
 
-    private static final Logger logger = Logger.getLogger(IndexController.class);
+    private static final Logger LOGGER = Logger.getLogger(IndexController.class);
     
     @Autowired
     ServletContext context;
@@ -55,7 +55,7 @@ public class IndexController {
                 context.setAttribute("categories", listCategory);
             }
         } catch (Exception e) {
-            logger.error("Error: "+e.getMessage());
+            LOGGER.error("Error: "+e.getMessage());
         }
         return "index";
     }
